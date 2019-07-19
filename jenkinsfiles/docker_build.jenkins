@@ -20,7 +20,7 @@ pipeline {
                 }
             }
         }
-        stage("create docker image") {
+        stage("push docker images") {
              steps {
                  echo " ============== Docker_Push =================="
                  dir ('docker/images/toolbox') {
