@@ -24,7 +24,7 @@ pipeline {
              steps {
                  echo " ============== Docker_Push =================="
                  dir ('docker/images/toolbox') {
-                 sh 'docker push localhost:5000/toolbox:lates . '
+                 sh 'docker push localhost:5000/toolbox:lates'
                         }
                     }
                 }
