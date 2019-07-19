@@ -15,15 +15,23 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('docker/images/toolbox') {
-                	sh 'docker build -t localhost:5000/toolbox:lates . '
+                	sh 'docker build -t toolbox:lates . '
                 }
             }
         }
+        stage("create docker image") {
+             steps {
+                 echo " ============== Docker_Push =================="
+                 dir ('docker/images/toolbox') {
+                 sh 'docker push localhost:5000/toolbox:lates . '
+                        }
+                    }
+                }
         stage("Remove old Images") {
-                    steps {
-                        echo " ============== remuving image =================="
-                        sh 'docker image prune -a --force --filter "until=240h" '
-                     }
+             steps {
+                 echo " ============== remuving image =================="
+                 sh 'docker image prune -a --force --filter "until=240h" '
+                  }
                 }
     }
 
