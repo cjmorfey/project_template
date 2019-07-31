@@ -1,0 +1,39 @@
+#!groovy
+// Run docker nginx
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent {
+        label 'master'
+        }
+    triggers { pollSCM('10 * * * *') }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("create docker Nginx") {
+            steps {
+                echo " ============== start building image =================="
+                dir ('docker/images/nginx') {
+                	sh 'docker build -t localhost:5000/nginx:lates . '
+                }
+            }
+        }
+        stage("push nginx images") {
+             steps {
+                 echo " ============== Docker_Push =================="
+                 dir ('docker/images/nginx') {
+                 sh 'docker push localhost:5000/nginx:lates'
+                        }
+                    }
+                }
+        stage("Remove old Images") {
+             steps {
+                 echo " ============== remuving image =================="
+                 sh 'docker image prune -a --force --filter "until=240h" '
+                  }
+                }
+    }
+
+}
