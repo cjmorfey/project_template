@@ -15,16 +15,16 @@ pipeline {
         stage("create docker Nginx") {
             steps {
                 echo " ============== start building image =================="
-                dir ('docker/images/nginx') {
-                	sh 'docker build -t mystery-hub.net/nginx:1.16 . '
+                dir ('docker/images/only_nginx') {
+                	sh 'docker build -t mystery-hub.net/nginx:1.7 . '
                 }
             }
         }
         stage("push nginx images") {
              steps {
                  echo " ============== Docker_Push =================="
-                 dir ('docker/images/nginx') {
-                 sh 'docker push mystery-hub.net/nginx:1.16'
+                 dir ('docker/images/only_nginx') {
+                 sh 'docker push mystery-hub.net/nginx:1.7'
                         }
                     }
                 }
