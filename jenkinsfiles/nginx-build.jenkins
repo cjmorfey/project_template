@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('docker/images/only_nginx') {
-                	sh 'docker build -t mystery-hub.net/nginx:1.7 . '
+                	sh 'docker build -t localhost:5000/nginx:1.7 . '
                 }
             }
         }
@@ -24,8 +24,8 @@ pipeline {
              steps {
                  echo " ============== Docker_Push =================="
                  dir ('docker/images/only_nginx') {
-                 sh 'docker tag nginx:1.7 mystery-hub.net/nginx:1.7'
-                 sh 'docker push mystery-hub.net/nginx:1.7'
+
+                 sh 'docker push localhost:5000/nginx:1.7'
                         }
                     }
                 }
