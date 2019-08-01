@@ -24,7 +24,7 @@ pipeline {
              steps {
                  echo " ============== Docker_Push =================="
                  dir ('docker/images/toolbox') {
-                 sh 'docker tag toolbox myregistry.net/toolbox:lates'
+
                  sh 'docker push myregistry.net/toolbox:lates'
                         }
                     }
