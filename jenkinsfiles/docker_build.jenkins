@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('docker/images/toolbox') {
-                	sh 'docker build -t localhost:5000/toolbox:lates . '
+                	sh 'docker build -t myregistry.net/toolbox:lates . '
                 }
             }
         }
@@ -24,7 +24,8 @@ pipeline {
              steps {
                  echo " ============== Docker_Push =================="
                  dir ('docker/images/toolbox') {
-                 sh 'docker push localhost:5000/toolbox:lates'
+                 sh 'docker tag lates myregistry.net/toolbox:lates'
+                 sh 'docker push myregistry.net/toolbox:lates'
                         }
                     }
                 }
