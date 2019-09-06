@@ -1,0 +1,22 @@
+#!groovy
+// Remove old Images
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent {
+        label 'master'
+        }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("Remove old Images") {
+             steps {
+                 echo " ============== Remuving images =================="
+                 sh 'docker image prune -a --force --filter "until=240h" '
+                  }
+                }
+    }
+
+}
