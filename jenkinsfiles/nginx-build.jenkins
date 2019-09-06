@@ -15,17 +15,17 @@ pipeline {
         stage("create docker Nginx") {
             steps {
                 echo " ============== start building image =================="
-                dir ('docker/images/only_nginx') {
-                	sh 'docker build -t myregistry.net/nginx:1.7 . '
+                dir ('docker/images/nginx') {
+                	sh 'docker build -t myregistry.net/nginx:1.16 . '
                 }
             }
         }
         stage("push nginx images") {
              steps {
                  echo " ============== Docker_Push =================="
-                 dir ('docker/images/only_nginx') {
+                 dir ('docker/images/nginx') {
 
-                 sh 'docker push myregistry.net/nginx:1.7'
+                 sh 'docker push myregistry.net/nginx:1.16'
                         }
                     }
                 }
