@@ -17,8 +17,8 @@ pipeline {
         stage("Remove old Images") {
              steps {
                  echo " ============== Remuving images =================="
-                 echo "Until: ${params.until}"
-                 sh 'docker image prune -a --force --filter "until=${params.until}" '
+                 echo Until=${params.until}
+                 sh 'docker image prune -a --force --filter "until=$Until" '
                   }
                 }
     }
