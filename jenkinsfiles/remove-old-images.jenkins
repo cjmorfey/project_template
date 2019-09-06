@@ -6,6 +6,9 @@ pipeline {
     agent {
         label 'master'
         }
+    parameters {
+        text(name: 'until', defaultValue: '', description: 'Enter until hours')
+    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
@@ -14,7 +17,7 @@ pipeline {
         stage("Remove old Images") {
              steps {
                  echo " ============== Remuving images =================="
-                 sh 'docker image prune -a --force --filter "until=240h" '
+                 sh 'docker image prune -a --force --filter "until=${params.until}" '
                   }
                 }
     }
