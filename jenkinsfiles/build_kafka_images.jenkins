@@ -1,0 +1,34 @@
+#!groovy
+// Run docker kafka
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent {
+        label 'master'
+        }
+    triggers { pollSCM('5 * * * *') }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("create docker Kafka & ZooKeeper") {
+            steps {
+                echo " ============== start building image =================="
+                dir ('docker/images/kafka_zookeeper') {
+                	sh 'docker build -t myregistry.net/kafka:0.10.1.0 . '
+                }
+            }
+        }
+        stage("push nginx images") {
+             steps {
+                 echo " ============== Docker_Push =================="
+                 dir ('docker/images/nginx') {
+
+                 sh 'docker push myregistry.net/nginx:1.17.3'
+                        }
+                    }
+                }
+    }
+
+}
