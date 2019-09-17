@@ -1,1 +1,1 @@
-COPY kafka_2.11-0.10.1.0.tgz /var/lib/docker/tmp/kafka_2.11-0.10.1.0.tgz
+mv /var/lib/docker/tmp/kafka_2.11-0.10.1.0.tgz /kafka
