@@ -20,12 +20,12 @@ pipeline {
                 }
             }
         }
-        stage("push nginx images") {
+        stage("push Kafka & ZooKeeper images") {
              steps {
                  echo " ============== Docker_Push =================="
-                 dir ('docker/images/nginx') {
+                 dir ('docker/images/kafka_zookeeper') {
 
-                 sh 'docker push myregistry.net/nginx:1.17.3'
+                 sh 'docker push myregistry.net/kafka:0.10.1.0'
                         }
                     }
                 }
