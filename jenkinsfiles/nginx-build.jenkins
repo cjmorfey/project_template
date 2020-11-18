@@ -25,7 +25,7 @@ pipeline {
                  echo " ============== Docker_Push =================="
                  dir ('docker/images/nginx') {
 
-                 sh 'docker push myregistry.net/nginx:latest'
+                 sh 'docker push myregistry.net/nginx:latest:1.19.4'
                         }
                     }
                 }
