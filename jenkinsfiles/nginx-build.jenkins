@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('docker/images/nginx') {
-                	sh 'docker build -t myregistry.net/nginx:latest . '
+                	sh 'docker build -t myregistry.net/nginx:1.16 . '
                 }
             }
         }
